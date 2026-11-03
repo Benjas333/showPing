@@ -48,13 +48,13 @@ export default definePlugin({
 
     renderPing() {
         if (!settings.store.showNearbyConnectionStatus) return null;
-        return <PingElement variant="text-sm/medium" />;
+        return <PingElement size="sm" />;
     },
     renderContainer(children: React.ReactNode) {
         if (!settings.store.showUnderConnectionIcon) return children;
         return <div className="pingContainer">
             {children}
-            <PingElement variant="text-xxs/medium" parenthesis={false} color="var(--text-feedback-positive)" />
+            <PingElement size="xxs" parenthesis={false} color="var(--text-feedback-positive)" />
         </div>;
     }
 });

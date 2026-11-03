@@ -6,14 +6,14 @@
 
 import "./Ping.css";
 
-import { FluxEvent, TextVariant } from "@vencord/discord-types";
+import { Text, TextSize, TextWeight } from "@components/Text";
+import { FluxEvent } from "@vencord/discord-types";
 import { FluxDispatcher, useEffect, useState } from "@webpack/common";
 
 
 import { RTCConnectionStore } from "../stores";
-import { TextCompat } from "@components/BaseText";
 
-export function PingElement({ variant, parenthesis = true, color }: { variant: TextVariant; parenthesis?: boolean; color?: string; }) {
+export function PingElement({ size, weight = "medium", parenthesis = true, color }: { size: TextSize; weight?: TextWeight; parenthesis?: boolean; color?: string; }) {
     const [ping, setPing] = useState(() => RTCConnectionStore.getLastPing());
 
     const formatPing = (ping: number | undefined) => {
@@ -31,5 +31,5 @@ export function PingElement({ variant, parenthesis = true, color }: { variant: T
         };
     }, []);
 
-    return (<TextCompat variant={variant} className="pingDisplay" style={{ color: color ?? "inherit" }}>{formatPing(ping)}</TextCompat>);
+    return (<Text size={size} weight={weight} className="pingDisplay" style={{ color: color ?? "inherit" }}>{formatPing(ping)}</Text>);
 }
