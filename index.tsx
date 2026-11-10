@@ -34,7 +34,7 @@ export default definePlugin({
                 },
             ]
         },
-        /* There has to be a better way to do this x2 */
+        /* There has to be a better way to do this */
         {
             find: /\[\i\.fontScaling\]:\i/,
             replacement: {
