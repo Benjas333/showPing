@@ -7,10 +7,10 @@
 import definePlugin from "@utils/types";
 import { React } from "@webpack/common";
 
-import { PingElement } from "./components/Ping";
 import { settings } from "./settings";
 
-import ErrorBoundary from "@components/ErrorBoundary";
+import { PingUnderConnection } from "./components/PingUnderConnection";
+import { PingNearbyStatus } from "./components/PingNearbyStatus";
 
 export default definePlugin({
     name: "ShowPing",
@@ -45,25 +45,9 @@ export default definePlugin({
     ],
 
     renderPing() {
-        return <>
-            {settings.store.showNearbyConnectionStatus &&
-                <ErrorBoundary>
-                <PingElement size="sm" />
-                </ErrorBoundary>
-            }
-        </>;
+        return <PingNearbyStatus />;
     },
     renderContainer(children: React.ReactNode) {
-        return <>
-            {!settings.store.showUnderConnectionIcon
-                ? children
-                : <div className="pingContainer">
-                    {children}
-                    <ErrorBoundary>
-                    <PingElement size="xxs" parenthesis={false} color="var(--text-feedback-positive)" />
-                    </ErrorBoundary>
-                </div>
-            }
-        </>;
+        return <PingUnderConnection>{children}</PingUnderConnection>;
     }
 });

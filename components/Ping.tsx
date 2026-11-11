@@ -12,6 +12,7 @@ import { FluxDispatcher, useEffect, useState } from "@webpack/common";
 
 
 import { RTCConnectionStore } from "../stores";
+import ErrorBoundary from "@components/ErrorBoundary";
 
 export function PingElement({ size, weight = "medium", parenthesis = true, color }: { size: TextSize; weight?: TextWeight; parenthesis?: boolean; color?: string; }) {
     const [ping, setPing] = useState(() => RTCConnectionStore.getLastPing());
@@ -31,5 +32,14 @@ export function PingElement({ size, weight = "medium", parenthesis = true, color
         };
     }, []);
 
-    return (<Text size={size} weight={weight} className="pingDisplay" style={{ color: color ?? "inherit" }}>{formatPing(ping)}</Text>);
+    return <ErrorBoundary>
+        <Text
+            size={size}
+            weight={weight}
+            className="pingDisplay"
+            style={{ color: color ?? "inherit" }}
+        >
+            {formatPing(ping)}
+        </Text>
+    </ErrorBoundary>;
 }
